@@ -20,6 +20,11 @@ indico_conf = "" # path to indico.conf
 
 import os
 
+indico_conf = indico_conf or os.getenv('INDICO_CONFIG') or os.path.join(
+    os.getenv('VIRTUAL_ENV') or '/',
+    'etc', 'indico.conf'
+)
+
 if indico_conf == '': # we may be in development mode or in installation mode
     indico_conf = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'etc', 'indico.conf')
     if not os.path.exists(indico_conf):
